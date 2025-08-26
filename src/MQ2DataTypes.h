@@ -2091,7 +2091,7 @@ public:
 class MQ2ZoneType : public MQ2Type
 {
 public:
-    static enum ZoneMembers
+    enum ZoneMembers
     {
         Name=1,
         ShortName=2,

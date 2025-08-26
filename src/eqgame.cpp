@@ -567,6 +567,19 @@ unsigned char __fastcall SendMessage_Detour(DWORD* con, unsigned __int32 unk, un
 
 				delete me;
 			}
+			else
+			{
+				MacEntry_Struct* me = new MacEntry_Struct;
+				memset(me, 0, sizeof(MacEntry_Struct));
+				me->opcode = 0xf13;
+				char addressSpoof[8] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+				memcpy(&me->address, addressSpoof, 8);
+
+				SendMessage_Trampoline(con, unk, channel, (char*)me,
+					sizeof(MacEntry_Struct), a6, a7);
+
+				delete me;
+			}
 		}
 
 		if (isMQ2PreventionEnabled) {
@@ -827,6 +840,16 @@ void InitHooks()
 		DebugSpew("enabling old model mount support");
 		var = (((DWORD)0x0058DE28 - 0x400000) + baseAddress);
 		PatchA((DWORD*)var, "\x32\xC0", 2); // No mount models
+	}
+
+	if (isAllowBrownSkeletonsEnabled) {
+		var = (((DWORD)0x00594B09 - 0x400000) + baseAddress);
+		PatchA((DWORD*)var, "\xEB", 1);
+	}
+
+	if (isAllowAllElementalsEnabled) {
+		var = (((DWORD)(0x0048F668 - 0x400000)) + baseAddress);
+		PatchA((BYTE*)var, "\xE9\x14\x01\x00\x00\x90", 6);
 	}
 
 	if (isAllowIllegalAugmentsEnabled) {

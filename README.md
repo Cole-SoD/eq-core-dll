@@ -12,4 +12,4 @@ Core DLL for EverQuest to do patching, opt in to features
 - Click Build, verify success
 - Find src/_options.h, and set values to true where you want enabled, or follow instructions for custom values
 - Click Build again, verify success
-- Copy bin/dinput8.dll to your eq client directory
+- Copy bin/dinput8.dll to your eq client directory# eq-core-dll

@@ -102,7 +102,7 @@ namespace MQ2Internal {
         BOOL bTargetable;
     } SEARCHSPAWN, *PSEARCHSPAWN;
 
-    static enum SearchItemFlag
+    enum SearchItemFlag
     {
         Lore=1,
         NoDrop=2,
